@@ -134,21 +134,28 @@ onMounted(() => {
     <Head title="Pesan Tiket | HDEX Trans Bus" />
 
     <div
-        class="min-h-screen bg-gray-50 font-sans text-gray-900 selection:bg-[#d4af37] selection:text-white"
+        class="min-h-screen overflow-x-hidden bg-gray-50 font-sans text-gray-900 selection:bg-[#d4af37] selection:text-white"
     >
+        <style>
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+        </style>
         <!-- Navigation -->
         <header
             class="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/90 shadow-sm backdrop-blur-md transition-all"
         >
             <nav
-                class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
+                class="mx-auto flex max-w-7xl items-center justify-between p-4 sm:px-6 lg:px-8"
                 aria-label="Global"
             >
                 <div class="flex lg:flex-1">
                     <a href="#" class="-m-1.5 p-1.5">
                         <span class="sr-only">HDEX Trans</span>
                         <div
-                            class="text-2xl font-black tracking-tighter text-gray-900"
+                            class="text-xl font-black tracking-tighter text-gray-900 sm:text-2xl"
                         >
                             HDEX<span class="text-[#d4af37]">TRANS</span>
                         </div>
@@ -334,7 +341,7 @@ onMounted(() => {
                         <Link
                             v-if="canRegister"
                             href="/register"
-                            class="rounded-full bg-[#d4af37] px-5 py-2 text-sm font-bold text-white shadow-md shadow-[#d4af37]/30 transition hover:-translate-y-0.5 hover:bg-[#b08d26]"
+                            class="hidden rounded-full bg-[#d4af37] px-5 py-2 text-sm font-bold text-white shadow-md shadow-[#d4af37]/30 transition hover:-translate-y-0.5 hover:bg-[#b08d26] sm:block"
                             >Daftar</Link
                         >
                     </template>
@@ -1386,7 +1393,7 @@ onMounted(() => {
                 </svg>
                 <!-- Notification Dot -->
                 <span
-                    class="absolute -top-1 -right-1 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-red-600 text-[10px] font-black text-white ring-4 ring-gray-50"
+                    class="absolute top-0 right-0 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-red-600 text-[10px] font-black text-white ring-4 ring-gray-50"
                     >1</span
                 >
             </a>
