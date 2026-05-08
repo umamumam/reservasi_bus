@@ -12,13 +12,22 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (name) => {
+        const noLayoutPages = [
+            'Welcome', 
+            'SeatSelection', 
+            'Payment', 
+            'Ticket', 
+            'User/Bookings/Index',
+            'settings/Profile',
+            'settings/Security',
+            'settings/Appearance'
+        ];
+        
+        if (noLayoutPages.includes(name)) return null;
+
         switch (true) {
-            case name === 'Welcome' || name === 'SeatSelection' || name === 'Payment' || name === 'Ticket' || name === 'User/Bookings/Index':
-                return null;
             case name.startsWith('auth/'):
                 return AuthLayout;
-            case name.startsWith('settings/'):
-                return [AppLayout, SettingsLayout];
             default:
                 return AppLayout;
         }

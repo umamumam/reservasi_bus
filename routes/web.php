@@ -179,6 +179,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
             if ($request->user()->role !== 'admin') abort(403);
             return Inertia::render('Admin/Bookings/Index', ['bookings' => Booking::with('user', 'schedule.bus', 'schedule.busRoute.originCity', 'schedule.busRoute.destinationCity')->latest()->get()]);
         })->name('admin.bookings');
+
+        Route::get('/users', function (Illuminate\Http\Request $request) {
+            if ($request->user()->role !== 'admin') abort(403);
+            return Inertia::render('Admin/Users/Index', [
+                'users' => \App\Models\User::latest()->get()
+            ]);
+        })->name('admin.users');
+
+        Route::delete('/users/{user}', function (Illuminate\Http\Request $request, \App\Models\User $user) {
+            if ($request->user()->role !== 'admin') abort(403);
+            if ($user->role === 'admin') abort(403, 'Cannot delete admin');
+            $user->delete();
+            return back();
+        })->name('admin.users.destroy');
     });
 });
 

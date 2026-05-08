@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, FolderGit2, LayoutGrid, Bus, Route, Calendar, Ticket, Home, MapPin, CalendarClock } from 'lucide-vue-next';
+import { BookOpen, FolderGit2, LayoutGrid, Bus, Route, Calendar, Ticket, Home, MapPin, CalendarClock, Users } from 'lucide-vue-next';
 import AppLogo from '@/components/AppLogo.vue';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -40,7 +40,8 @@ const mainNavItems = computed<NavItem[]>(() => {
             { title: 'Manajemen Kota', href: '/admin/cities', icon: MapPin },
             { title: 'Rute', href: '/admin/routes', icon: Route },
             { title: 'Jadwal', href: '/admin/schedules', icon: CalendarClock },
-            { title: 'Data Transaksi', href: '/admin/bookings', icon: BookOpen }
+            { title: 'Data Transaksi', href: '/admin/bookings', icon: BookOpen },
+            { title: 'Manajemen User', href: '/admin/users', icon: Users }
         );
     } else {
         items.push({ title: 'Tiket Saya', href: '/user/bookings', icon: Ticket });

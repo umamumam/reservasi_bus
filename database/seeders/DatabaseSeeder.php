@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         // Admin user
         User::factory()->create([
             'name' => 'Admin HDEX',
-            'email' => 'admin@hdextrans.com',
-            'password' => Hash::make('password'),
+            'email' => 'umam@gmail.com',
+            'password' => Hash::make('12345678'),
             'role' => 'admin',
         ]);
 
