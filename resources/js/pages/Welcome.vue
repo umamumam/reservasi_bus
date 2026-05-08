@@ -120,22 +120,13 @@ const toggleFaq = (index: number) => {
 };
 
 // WhatsApp Logic
-const showWAPopup = ref(false);
 onMounted(() => {
     AOS.init({ duration: 800, once: true, offset: 100 });
     bgInterval = setInterval(() => {
         currentBgIndex.value = (currentBgIndex.value + 1) % bgImages.length;
     }, 10000); // 10 seconds
 
-    // Show WA popup after 4 seconds
-    setTimeout(() => {
-        showWAPopup.value = true;
-
-        // Auto hide after 10 seconds of being visible
-        setTimeout(() => {
-            showWAPopup.value = false;
-        }, 10000);
-    }, 4000);
+    // WhatsApp logic remains via floating button
 });
 </script>
 
@@ -1376,49 +1367,8 @@ onMounted(() => {
         <div
             class="fixed right-6 bottom-6 z-[60] flex flex-col items-end gap-3 sm:right-10 sm:bottom-10"
         >
-            <!-- Message Bubble -->
-            <transition
-                enter-active-class="transition duration-300 ease-out"
-                enter-from-class="transform opacity-0 translate-x-10 scale-95"
-                enter-to-class="transform opacity-100 translate-x-0 scale-100"
-                leave-active-class="transition duration-200 ease-in"
-                leave-from-class="transform opacity-100 translate-x-0 scale-100"
-                leave-to-class="transform opacity-0 translate-x-10 scale-95"
-            >
-                <div
-                    v-if="showWAPopup"
-                    class="flex items-center gap-3 rounded-2xl border border-gray-100 bg-white px-5 py-3 shadow-2xl"
-                >
-                    <div
-                        class="flex h-2 w-2 animate-pulse rounded-full bg-green-500"
-                    ></div>
-                    <p
-                        class="text-sm font-black tracking-widest text-gray-700 uppercase"
-                    >
-                        Ada Pertanyaan? Chat Kami!
-                    </p>
-                    <button
-                        @click="showWAPopup = false"
-                        class="text-gray-400 transition hover:text-gray-600"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="3"
-                            stroke="currentColor"
-                            class="h-3 w-3"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </button>
-                </div>
-            </transition>
-
+            <!-- Message Bubble Removed to prevent overflow -->
+            
             <a
                 href="https://wa.me/6281234567890"
                 target="_blank"
