@@ -20,17 +20,19 @@ const form = useForm({
 
 const validDestinations = computed(() => {
     if (!form.origin) return props.cities;
-    
+
     const validDestIds = props.busRoutes
-        .filter(r => r.origin_city_id === form.origin)
-        .map(r => r.destination_city_id);
-        
-    return props.cities.filter(c => validDestIds.includes(c.id));
+        .filter((r) => r.origin_city_id === form.origin)
+        .map((r) => r.destination_city_id);
+
+    return props.cities.filter((c) => validDestIds.includes(c.id));
 });
 
 const validOrigins = computed(() => {
-    const validOriginIds = [...new Set(props.busRoutes.map(r => r.origin_city_id))];
-    return props.cities.filter(c => validOriginIds.includes(c.id));
+    const validOriginIds = [
+        ...new Set(props.busRoutes.map((r) => r.origin_city_id)),
+    ];
+    return props.cities.filter((c) => validOriginIds.includes(c.id));
 });
 
 const schedules = ref([]);
@@ -128,7 +130,7 @@ onMounted(() => {
     // Show WA popup after 4 seconds
     setTimeout(() => {
         showWAPopup.value = true;
-        
+
         // Auto hide after 10 seconds of being visible
         setTimeout(() => {
             showWAPopup.value = false;
@@ -136,7 +138,6 @@ onMounted(() => {
     }, 4000);
 });
 </script>
-
 
 <template>
     <Head title="Pesan Tiket | HDEX Trans Bus" />
@@ -414,12 +415,15 @@ onMounted(() => {
                         class="grid grid-cols-1 items-end gap-4 sm:grid-cols-2 md:grid-cols-4"
                     >
                         <div class="space-y-2">
-                            <label class="ml-1 block text-sm font-bold text-gray-700">Kota Asal</label>
+                            <label
+                                class="ml-1 block text-sm font-bold text-gray-700"
+                                >Kota Asal</label
+                            >
                             <select
                                 v-model="form.origin"
                                 @change="form.destination = ''"
                                 required
-                                class="w-full appearance-none rounded-xl border-gray-200 bg-white px-4 py-3.5 pr-10 text-gray-900 shadow-sm transition focus:border-[#d4af37] focus:ring-[#d4af37] bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3E%3Cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27m6 8 4 4 4-4%27%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_0.75rem_center] bg-no-repeat"
+                                class="bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3E%3Cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27m6 8 4 4 4-4%27%2F%3E%3C%2Fsvg%3E')] w-full appearance-none rounded-xl border-gray-200 bg-white bg-[length:1.25rem_1.25rem] bg-[right_0.75rem_center] bg-no-repeat px-4 py-3.5 pr-10 text-gray-900 shadow-sm transition focus:border-[#d4af37] focus:ring-[#d4af37]"
                             >
                                 <option value="" disabled>Pilih asal</option>
                                 <option
@@ -433,14 +437,23 @@ onMounted(() => {
                         </div>
 
                         <div class="space-y-2">
-                            <label class="ml-1 block text-sm font-bold text-gray-700">Kota Tujuan</label>
+                            <label
+                                class="ml-1 block text-sm font-bold text-gray-700"
+                                >Kota Tujuan</label
+                            >
                             <select
                                 v-model="form.destination"
                                 :disabled="!form.origin"
                                 required
-                                class="w-full appearance-none rounded-xl border-gray-200 bg-white px-4 py-3.5 pr-10 text-gray-900 shadow-sm transition focus:border-[#d4af37] focus:ring-[#d4af37] disabled:opacity-50 disabled:bg-gray-50 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3E%3Cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27m6 8 4 4 4-4%27%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_0.75rem_center] bg-no-repeat"
+                                class="bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3E%3Cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27m6 8 4 4 4-4%27%2F%3E%3C%2Fsvg%3E')] w-full appearance-none rounded-xl border-gray-200 bg-white bg-[length:1.25rem_1.25rem] bg-[right_0.75rem_center] bg-no-repeat px-4 py-3.5 pr-10 text-gray-900 shadow-sm transition focus:border-[#d4af37] focus:ring-[#d4af37] disabled:bg-gray-50 disabled:opacity-50"
                             >
-                                <option value="" disabled>{{ form.origin ? 'Pilih tujuan' : 'Pilih asal dulu' }}</option>
+                                <option value="" disabled>
+                                    {{
+                                        form.origin
+                                            ? 'Pilih tujuan'
+                                            : 'Pilih asal dulu'
+                                    }}
+                                </option>
                                 <option
                                     v-for="city in validDestinations"
                                     :key="city.id"
@@ -481,161 +494,483 @@ onMounted(() => {
         </div>
 
         <!-- Search Results Section -->
-        <div id="search-results" v-if="hasSearched" class="bg-gray-50 py-12 sm:py-20">
+        <div
+            id="search-results"
+            v-if="hasSearched"
+            class="bg-gray-50 py-12 sm:py-20"
+        >
             <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                 <!-- Header Info -->
-                <div class="mb-8 border-l-4 border-[#e11d48] pl-5" data-aos="fade-right">
-                    <h2 class="text-2xl font-black uppercase tracking-tight text-gray-900 sm:text-3xl">
-                        {{ cities.find(c => c.id === form.origin)?.name }} <span class="text-[#e11d48] mx-2">&rarr;</span> {{ cities.find(c => c.id === form.destination)?.name }}
+                <div
+                    class="mb-8 border-l-4 border-[#e11d48] pl-5"
+                    data-aos="fade-right"
+                >
+                    <h2
+                        class="text-2xl font-black tracking-tight text-gray-900 uppercase sm:text-3xl"
+                    >
+                        {{ cities.find((c) => c.id === form.origin)?.name }}
+                        <span class="mx-2 text-[#e11d48]">&rarr;</span>
+                        {{
+                            cities.find((c) => c.id === form.destination)?.name
+                        }}
                     </h2>
-                    <p class="mt-1 text-sm font-bold text-gray-500">Tanggal : {{ new Date(form.date).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' }) }}</p>
+                    <p class="mt-1 text-sm font-bold text-gray-500">
+                        Tanggal :
+                        {{
+                            new Date(form.date).toLocaleDateString('id-ID', {
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric',
+                            })
+                        }}
+                    </p>
                 </div>
 
                 <!-- Ubah Pencarian Bar -->
-                <div class="mb-8 flex items-center justify-between rounded-2xl border border-gray-100 bg-white px-6 py-4 shadow-sm" data-aos="fade-up">
-                    <div class="flex items-center gap-3 text-sm font-bold text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-4 w-4 text-[#e11d48]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                <div
+                    class="mb-8 flex items-center justify-between rounded-2xl border border-gray-100 bg-white px-6 py-4 shadow-sm"
+                    data-aos="fade-up"
+                >
+                    <div
+                        class="flex items-center gap-3 text-sm font-bold text-gray-400"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2.5"
+                            stroke="currentColor"
+                            class="h-4 w-4 text-[#e11d48]"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                            />
+                        </svg>
                         UBAH PENCARIAN
                     </div>
-                    <button @click="document.getElementById('beranda').scrollIntoView({ behavior: 'smooth' })" class="flex items-center gap-1.5 rounded-lg bg-gray-50 px-4 py-1.5 text-xs font-bold text-gray-600 hover:bg-gray-100 transition">
+                    <button
+                        @click="
+                            document
+                                .getElementById('beranda')
+                                .scrollIntoView({ behavior: 'smooth' })
+                        "
+                        class="flex items-center gap-1.5 rounded-lg bg-gray-50 px-4 py-1.5 text-xs font-bold text-gray-600 transition hover:bg-gray-100"
+                    >
                         Edit
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-3 w-3"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            class="h-3 w-3"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                            />
+                        </svg>
                     </button>
                 </div>
 
                 <!-- Time Filters -->
-                <div class="mb-8 flex w-full overflow-x-auto pb-4 hide-scrollbar gap-3" data-aos="fade-up" data-aos-delay="100">
-                    <button class="shrink-0 rounded-full bg-[#e11d48] px-6 py-2.5 text-sm font-bold text-white shadow-md transition">Semua</button>
-                    <button class="shrink-0 rounded-full bg-white border border-gray-200 px-6 py-2.5 text-sm font-bold text-gray-500 hover:bg-gray-50 transition">Pagi (00:00 - 11:59)</button>
-                    <button class="shrink-0 rounded-full bg-white border border-gray-200 px-6 py-2.5 text-sm font-bold text-gray-500 hover:bg-gray-50 transition">Siang (12:00 - 17:59)</button>
-                    <button class="shrink-0 rounded-full bg-white border border-gray-200 px-6 py-2.5 text-sm font-bold text-gray-500 hover:bg-gray-50 transition">Malam (18:00 - 23:59)</button>
+                <div
+                    class="hide-scrollbar mb-8 flex w-full gap-3 overflow-x-auto pb-4"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+                    <button
+                        class="shrink-0 rounded-full bg-[#e11d48] px-6 py-2.5 text-sm font-bold text-white shadow-md transition"
+                    >
+                        Semua
+                    </button>
+                    <button
+                        class="shrink-0 rounded-full border border-gray-200 bg-white px-6 py-2.5 text-sm font-bold text-gray-500 transition hover:bg-gray-50"
+                    >
+                        Pagi (00:00 - 11:59)
+                    </button>
+                    <button
+                        class="shrink-0 rounded-full border border-gray-200 bg-white px-6 py-2.5 text-sm font-bold text-gray-500 transition hover:bg-gray-50"
+                    >
+                        Siang (12:00 - 17:59)
+                    </button>
+                    <button
+                        class="shrink-0 rounded-full border border-gray-200 bg-white px-6 py-2.5 text-sm font-bold text-gray-500 transition hover:bg-gray-50"
+                    >
+                        Malam (18:00 - 23:59)
+                    </button>
                 </div>
 
                 <!-- Empty State -->
-                <div v-if="schedules.length === 0" class="rounded-[2.5rem] border border-gray-100 bg-white py-20 text-center shadow-xl" data-aos="zoom-in">
-                    <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gray-50 text-gray-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <div
+                    v-if="schedules.length === 0"
+                    class="rounded-[2.5rem] border border-gray-100 bg-white py-20 text-center shadow-xl"
+                    data-aos="zoom-in"
+                >
+                    <div
+                        class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gray-50 text-gray-300"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-10 w-10"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                            />
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-black text-gray-900">Jadwal Tidak Tersedia</h3>
-                    <p class="mt-2 text-gray-500">Maaf, tidak ada jadwal keberangkatan pada tanggal ini.</p>
+                    <h3 class="text-xl font-black text-gray-900">
+                        Jadwal Tidak Tersedia
+                    </h3>
+                    <p class="mt-2 text-gray-500">
+                        Maaf, tidak ada jadwal keberangkatan pada tanggal ini.
+                    </p>
                 </div>
 
                 <!-- Schedule Cards -->
                 <div class="space-y-6">
-                    <div v-for="(schedule, index) in schedules" :key="schedule.id" 
-                        class="relative rounded-[2rem] bg-white p-5 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group border border-gray-100"
-                        data-aos="fade-up" :data-aos-delay="index * 100">
-                        
+                    <div
+                        v-for="(schedule, index) in schedules"
+                        :key="schedule.id"
+                        class="group relative rounded-[2rem] border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8"
+                        data-aos="fade-up"
+                        :data-aos-delay="index * 100"
+                    >
                         <!-- Top Header: Bus Name & Type & Seats -->
-                        <div class="mb-6 flex justify-between items-start gap-2 border-b border-gray-50 pb-5">
+                        <div
+                            class="mb-6 flex items-start justify-between gap-2 border-b border-gray-50 pb-5"
+                        >
                             <div class="flex flex-col gap-2">
-                                <div class="flex w-max items-center gap-2 rounded-lg bg-gray-50 px-3 py-1.5 text-[11px] sm:text-xs font-bold text-gray-700 border border-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-3.5 w-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+                                <div
+                                    class="flex w-max items-center gap-2 rounded-lg border border-gray-100 bg-gray-50 px-3 py-1.5 text-[11px] font-bold text-gray-700 sm:text-xs"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        class="h-3.5 w-3.5"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+                                        />
+                                    </svg>
                                     {{ schedule.bus.name }}
                                 </div>
-                                <div class="flex w-max items-center gap-1 text-[10px] sm:text-xs font-black uppercase tracking-widest" :class="schedule.bus.layout_type === 'sleeper' ? 'text-[#d4af37]' : 'text-[#e11d48]'">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-3.5 w-3.5"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" /></svg>
-                                    {{ schedule.bus.layout_type === 'sleeper' ? 'SLEEPER' : 'REGULAR' }}
+                                <div
+                                    class="flex w-max items-center gap-1 text-[10px] font-black tracking-widest uppercase sm:text-xs"
+                                    :class="
+                                        schedule.bus.layout_type === 'sleeper'
+                                            ? 'text-[#d4af37]'
+                                            : 'text-[#e11d48]'
+                                    "
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        class="h-3.5 w-3.5"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    {{
+                                        schedule.bus.layout_type === 'sleeper'
+                                            ? 'SLEEPER'
+                                            : 'REGULAR'
+                                    }}
                                 </div>
                             </div>
-                            
+
                             <!-- Seats availability -->
-                            <div class="flex flex-col items-end justify-center text-right">
-                                <div class="text-2xl sm:text-3xl font-black text-[#e11d48] leading-none mb-1">
-                                    {{ schedule.available_seats }}<span class="text-xs sm:text-sm text-gray-400 font-bold">/{{ schedule.bus.total_seats }}</span>
+                            <div
+                                class="flex flex-col items-end justify-center text-right"
+                            >
+                                <div
+                                    class="mb-1 text-2xl leading-none font-black text-[#e11d48] sm:text-3xl"
+                                >
+                                    {{ schedule.available_seats
+                                    }}<span
+                                        class="text-xs font-bold text-gray-400 sm:text-sm"
+                                        >/{{ schedule.bus.total_seats }}</span
+                                    >
                                 </div>
-                                <div class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-gray-400">Tersedia</div>
+                                <div
+                                    class="text-[9px] font-black tracking-widest text-gray-400 uppercase sm:text-[10px]"
+                                >
+                                    Tersedia
+                                </div>
                             </div>
                         </div>
 
                         <!-- Middle: Time & Route -->
                         <div class="mb-6 flex items-center gap-3 sm:gap-6">
-                            <div class="flex h-10 w-10 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-red-50 text-[#e11d48]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 sm:h-8 sm:w-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <div
+                                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[#e11d48] sm:h-14 sm:w-14 sm:rounded-2xl"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    class="h-5 w-5 sm:h-8 sm:w-8"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
                             </div>
                             <div>
-                                <div class="text-3xl sm:text-5xl font-black italic tracking-tighter text-gray-900 leading-none mb-1">
+                                <div
+                                    class="mb-1 text-3xl leading-none font-black tracking-tighter text-gray-900 italic sm:text-5xl"
+                                >
                                     {{ formatTime(schedule.departure_time) }}
                                 </div>
-                                <div class="text-xs sm:text-sm font-bold text-gray-500">
-                                    {{ schedule.bus_route.origin_city.name }} <span class="text-[#d4af37] mx-1">&rarr;</span> {{ schedule.bus_route.destination_city.name }}
+                                <div
+                                    class="text-xs font-bold text-gray-500 sm:text-sm"
+                                >
+                                    {{ schedule.bus_route.origin_city.name }}
+                                    <span class="mx-1 text-[#d4af37]"
+                                        >&rarr;</span
+                                    >
+                                    {{
+                                        schedule.bus_route.destination_city.name
+                                    }}
                                 </div>
                             </div>
                         </div>
 
                         <!-- Bottom: Price & Action -->
-                        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                            <div class="relative w-full sm:w-auto flex-1">
-                                <div class="flex w-full items-center justify-between rounded-2xl border border-gray-200 bg-gray-50/50 px-5 py-3 sm:px-6 sm:py-4">
-                                    <span class="text-xs font-black uppercase tracking-widest text-gray-500">Tarif Dasar</span>
-                                    <div class="text-xl sm:text-2xl font-black text-[#e11d48]">
+                        <div
+                            class="flex flex-col items-center gap-4 sm:flex-row sm:gap-6"
+                        >
+                            <div class="relative w-full flex-1 sm:w-auto">
+                                <div
+                                    class="flex w-full items-center justify-between rounded-2xl border border-gray-200 bg-gray-50/50 px-5 py-3 sm:px-6 sm:py-4"
+                                >
+                                    <span
+                                        class="text-xs font-black tracking-widest text-gray-500 uppercase"
+                                        >Tarif Dasar</span
+                                    >
+                                    <div
+                                        class="text-xl font-black text-[#e11d48] sm:text-2xl"
+                                    >
                                         {{ formatPrice(schedule.price) }}
                                     </div>
                                 </div>
                             </div>
-                            <Link :href="`/schedule/${schedule.id}/seats`" 
-                                class="flex h-14 w-full sm:w-40 shrink-0 items-center justify-center rounded-2xl bg-[#e11d48] text-sm font-black uppercase tracking-widest text-white shadow-lg shadow-red-200 transition-all hover:-translate-y-0.5 hover:bg-red-700 active:translate-y-0">
+                            <Link
+                                :href="`/schedule/${schedule.id}/seats`"
+                                class="flex h-14 w-full shrink-0 items-center justify-center rounded-2xl bg-[#e11d48] text-sm font-black tracking-widest text-white uppercase shadow-lg shadow-red-200 transition-all hover:-translate-y-0.5 hover:bg-red-700 active:translate-y-0 sm:w-40"
+                            >
                                 Pilih Kursi &rarr;
                             </Link>
                         </div>
 
                         <!-- Bottom Toggle -->
-                        <div class="border-t border-gray-50 pt-5 mt-5">
-                            <button @click="toggleDetail(schedule.id)" class="flex w-full items-center justify-center gap-2 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-[#e11d48] transition">
+                        <div class="mt-5 border-t border-gray-50 pt-5">
+                            <button
+                                @click="toggleDetail(schedule.id)"
+                                class="flex w-full items-center justify-center gap-2 text-xs font-black tracking-widest text-gray-400 uppercase transition hover:text-[#e11d48]"
+                            >
                                 Detail Rute & Armada
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" 
-                                    class="h-3 w-3 transition-transform duration-300" :class="{'rotate-180': expandedDetail === schedule.id}">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="3"
+                                    stroke="currentColor"
+                                    class="h-3 w-3 transition-transform duration-300"
+                                    :class="{
+                                        'rotate-180':
+                                            expandedDetail === schedule.id,
+                                    }"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                    />
                                 </svg>
                             </button>
 
                             <!-- Expanded Content -->
-                            <transition enter-active-class="transition duration-300 ease-out" enter-from-class="transform opacity-0 -translate-y-4" enter-to-class="transform opacity-100 translate-y-0" leave-active-class="transition duration-200 ease-in" leave-from-class="transform opacity-100 translate-y-0" leave-to-class="transform opacity-0 -translate-y-4">
-                                <div v-if="expandedDetail === schedule.id" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 pb-2">
+                            <transition
+                                enter-active-class="transition duration-300 ease-out"
+                                enter-from-class="transform opacity-0 -translate-y-4"
+                                enter-to-class="transform opacity-100 translate-y-0"
+                                leave-active-class="transition duration-200 ease-in"
+                                leave-from-class="transform opacity-100 translate-y-0"
+                                leave-to-class="transform opacity-0 -translate-y-4"
+                            >
+                                <div
+                                    v-if="expandedDetail === schedule.id"
+                                    class="mt-6 grid grid-cols-1 gap-6 pb-2 md:grid-cols-2"
+                                >
                                     <div class="rounded-2xl bg-gray-50 p-6">
-                                        <div class="mb-4 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-400">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                                        <div
+                                            class="mb-4 flex items-center gap-2 text-xs font-black tracking-widest text-gray-400 uppercase"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="2"
+                                                stroke="currentColor"
+                                                class="h-4 w-4"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                                                />
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                                                />
+                                            </svg>
                                             Detail Rute & Waktu
                                         </div>
                                         <div class="space-y-4">
-                                            <div class="flex justify-between items-center text-sm font-bold">
-                                                <span class="text-gray-500">Titik Keberangkatan</span>
-                                                <span class="text-gray-900">{{ schedule.bus_route.origin_city.name }} ({{ formatTime(schedule.departure_time) }})</span>
+                                            <div
+                                                class="flex items-center justify-between text-sm font-bold"
+                                            >
+                                                <span class="text-gray-500"
+                                                    >Titik Keberangkatan</span
+                                                >
+                                                <span class="text-gray-900"
+                                                    >{{
+                                                        schedule.bus_route
+                                                            .origin_city.name
+                                                    }}
+                                                    ({{
+                                                        formatTime(
+                                                            schedule.departure_time,
+                                                        )
+                                                    }})</span
+                                                >
                                             </div>
-                                            <div class="flex justify-between items-center text-sm font-bold">
-                                                <span class="text-gray-500">Estimasi Kedatangan</span>
-                                                <span class="text-gray-900">{{ schedule.bus_route.destination_city.name }} ({{ formatTime(schedule.arrival_time) }})</span>
+                                            <div
+                                                class="flex items-center justify-between text-sm font-bold"
+                                            >
+                                                <span class="text-gray-500"
+                                                    >Estimasi Kedatangan</span
+                                                >
+                                                <span class="text-gray-900"
+                                                    >{{
+                                                        schedule.bus_route
+                                                            .destination_city
+                                                            .name
+                                                    }}
+                                                    ({{
+                                                        formatTime(
+                                                            schedule.arrival_time,
+                                                        )
+                                                    }})</span
+                                                >
                                             </div>
-                                            <div class="flex justify-between items-center text-sm font-bold">
-                                                <span class="text-gray-500">Jarak Tempuh</span>
-                                                <span class="text-gray-900">{{ schedule.bus_route.distance }} KM</span>
+                                            <div
+                                                class="flex items-center justify-between text-sm font-bold"
+                                            >
+                                                <span class="text-gray-500"
+                                                    >Jarak Tempuh</span
+                                                >
+                                                <span class="text-gray-900"
+                                                    >{{
+                                                        schedule.bus_route
+                                                            .distance
+                                                    }}
+                                                    KM</span
+                                                >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="rounded-2xl bg-gray-50 p-6">
-                                        <div class="mb-4 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-400">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+                                        <div
+                                            class="mb-4 flex items-center gap-2 text-xs font-black tracking-widest text-gray-400 uppercase"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="2"
+                                                stroke="currentColor"
+                                                class="h-4 w-4"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+                                                />
+                                            </svg>
                                             Informasi Armada
                                         </div>
                                         <div class="space-y-4">
-                                            <div class="flex justify-between items-center text-sm font-bold">
-                                                <span class="text-gray-500">Nama Armada</span>
-                                                <span class="text-gray-900">{{ schedule.bus.name }}</span>
+                                            <div
+                                                class="flex items-center justify-between text-sm font-bold"
+                                            >
+                                                <span class="text-gray-500"
+                                                    >Nama Armada</span
+                                                >
+                                                <span class="text-gray-900">{{
+                                                    schedule.bus.name
+                                                }}</span>
                                             </div>
-                                            <div class="flex justify-between items-center text-sm font-bold">
-                                                <span class="text-gray-500">Nomor Polisi</span>
-                                                <span class="px-3 py-1 rounded bg-gray-200 text-gray-900 font-mono text-xs uppercase tracking-wider">{{ schedule.bus.plate_number }}</span>
+                                            <div
+                                                class="flex items-center justify-between text-sm font-bold"
+                                            >
+                                                <span class="text-gray-500"
+                                                    >Nomor Polisi</span
+                                                >
+                                                <span
+                                                    class="rounded bg-gray-200 px-3 py-1 font-mono text-xs tracking-wider text-gray-900 uppercase"
+                                                    >{{
+                                                        schedule.bus
+                                                            .plate_number
+                                                    }}</span
+                                                >
                                             </div>
-                                            <div class="flex justify-between items-center text-sm font-bold">
-                                                <span class="text-gray-500">Tipe Kelas</span>
-                                                <span class="text-gray-900 uppercase">{{ schedule.bus.layout_type === 'sleeper' ? 'Sleeper Class' : 'Royal Class' }}</span>
+                                            <div
+                                                class="flex items-center justify-between text-sm font-bold"
+                                            >
+                                                <span class="text-gray-500"
+                                                    >Tipe Kelas</span
+                                                >
+                                                <span
+                                                    class="text-gray-900 uppercase"
+                                                    >{{
+                                                        schedule.bus
+                                                            .layout_type ===
+                                                        'sleeper'
+                                                            ? 'Sleeper Class'
+                                                            : 'Royal Class'
+                                                    }}</span
+                                                >
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </transition>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -1038,7 +1373,9 @@ onMounted(() => {
         </footer>
 
         <!-- WhatsApp Floating Button -->
-        <div class="fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-3 sm:bottom-10 sm:right-10">
+        <div
+            class="fixed right-6 bottom-6 z-[60] flex flex-col items-end gap-3 sm:right-10 sm:bottom-10"
+        >
             <!-- Message Bubble -->
             <transition
                 enter-active-class="transition duration-300 ease-out"
@@ -1048,27 +1385,60 @@ onMounted(() => {
                 leave-from-class="transform opacity-100 translate-x-0 scale-100"
                 leave-to-class="transform opacity-0 translate-x-10 scale-95"
             >
-                <div v-if="showWAPopup" 
-                    class="rounded-2xl bg-white px-5 py-3 shadow-2xl border border-gray-100 flex items-center gap-3"
+                <div
+                    v-if="showWAPopup"
+                    class="flex items-center gap-3 rounded-2xl border border-gray-100 bg-white px-5 py-3 shadow-2xl"
                 >
-                    <div class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <p class="text-[10px] font-black text-gray-700 uppercase tracking-widest">Ada Pertanyaan? Chat Kami!</p>
-                    <button @click="showWAPopup = false" class="text-gray-400 hover:text-gray-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="h-3 w-3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <div
+                        class="flex h-2 w-2 animate-pulse rounded-full bg-green-500"
+                    ></div>
+                    <p
+                        class="text-sm font-black tracking-widest text-gray-700 uppercase"
+                    >
+                        Ada Pertanyaan? Chat Kami!
+                    </p>
+                    <button
+                        @click="showWAPopup = false"
+                        class="text-gray-400 transition hover:text-gray-600"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="3"
+                            stroke="currentColor"
+                            class="h-3 w-3"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
                     </button>
                 </div>
             </transition>
-            
-            <a 
-                href="https://wa.me/6281234567890" 
+
+            <a
+                href="https://wa.me/6281234567890"
                 target="_blank"
-                class="group relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-green-500 text-white shadow-2xl shadow-green-200 transition-all duration-300 hover:scale-110 hover:bg-green-600 active:scale-95"
+                class="group relative flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-2xl shadow-green-200 transition-all duration-300 hover:scale-110 hover:bg-green-600 active:scale-95 sm:h-16 sm:w-16"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" class="h-8 w-8 sm:h-9 sm:w-9 transition-transform group-hover:rotate-12">
-                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-117zm-157 338.7h-.1c-33.2 0-65.7-8.9-93.9-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.2-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.5-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    fill="currentColor"
+                    class="h-8 w-8 transition-transform group-hover:rotate-12 sm:h-9 sm:w-9"
+                >
+                    <path
+                        d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-117zm-157 338.7h-.1c-33.2 0-65.7-8.9-93.9-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.2-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.5-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                    />
                 </svg>
                 <!-- Notification Dot -->
-                <span class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-black text-white ring-4 ring-gray-50 animate-pulse">1</span>
+                <span
+                    class="absolute -top-1 -right-1 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-red-600 text-[10px] font-black text-white ring-4 ring-gray-50"
+                    >1</span
+                >
             </a>
         </div>
     </div>
