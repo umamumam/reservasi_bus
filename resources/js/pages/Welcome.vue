@@ -136,13 +136,6 @@ onMounted(() => {
     <div
         class="min-h-screen overflow-x-hidden bg-gray-50 font-sans text-gray-900 selection:bg-[#d4af37] selection:text-white"
     >
-        <style>
-            html, body {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
-            }
-        </style>
         <!-- Navigation -->
         <header
             class="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/90 shadow-sm backdrop-blur-md transition-all"
@@ -1400,3 +1393,12 @@ onMounted(() => {
         </div>
     </div>
 </template>
+
+<style>
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+</style>

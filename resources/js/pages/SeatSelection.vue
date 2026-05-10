@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faStairs } from '@fortawesome/free-solid-svg-icons';
+
+const byPrefixAndName = {
+    fas: {
+        'stairs': faStairs
+    }
+};
 
 const props = defineProps<{
     schedule: any;
@@ -193,42 +201,49 @@ const proceedToBooking = () => {
                         <h2 class="text-xl font-black text-gray-900 mb-6">Keterangan</h2>
                         <div class="space-y-4">
                             <div class="flex items-center gap-4">
-                                <div class="w-8 h-8 rounded-xl bg-gray-50 border border-gray-100"></div>
+                                <div class="text-[#bfc3cc]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                                        <path d="M15 3H9C6.02024 3 3.54782 5.17213 3.07974 8.01937C3.21811 8.00655 3.35829 8 3.5 8C5.98528 8 8 10.0147 8 12.5V14H16V12.5C16 10.0147 18.0147 8 20.5 8C20.6417 8 20.7819 8.00655 20.9203 8.01937C20.4522 5.17213 17.9798 3 15 3ZM21 10.05C20.8384 10.0172 20.6712 10 20.5 10C19.1193 10 18 11.1193 18 12.5V17H16V16H8V17H6V12.5C6 11.1193 4.88071 10 3.5 10C3.32877 10 3.16156 10.0172 3 10.05C1.85888 10.2816 1 11.2905 1 12.5C1 13.0886 1.18173 13.5388 1.39024 14.0554C1.67083 14.7505 1.9999 15.5658 1.99978 17V20C1.99978 20.5523 2.44749 21 2.99978 21H12H21.0002C21.5525 21 22.0002 20.5523 22.0002 20V17C22.0001 15.5658 22.3292 14.7505 22.6098 14.0554C22.8183 13.5388 23 13.0886 23 12.5C23 11.2905 22.1411 10.2816 21 10.05Z" />
+                                    </svg>
+                                </div>
                                 <span class="text-sm font-bold text-gray-600">Tersedia</span>
                             </div>
                             <div class="flex items-center gap-4">
-                                <div class="w-8 h-8 rounded-xl bg-[#e11d48]/10 border border-[#e11d48] flex items-center justify-center">
-                                    <div class="w-2 h-2 rounded-full bg-[#e11d48]"></div>
+                                <div class="text-[#22c55e]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                                        <path d="M15 3H9C6.02024 3 3.54782 5.17213 3.07974 8.01937C3.21811 8.00655 3.35829 8 3.5 8C5.98528 8 8 10.0147 8 12.5V14H16V12.5C16 10.0147 18.0147 8 20.5 8C20.6417 8 20.7819 8.00655 20.9203 8.01937C20.4522 5.17213 17.9798 3 15 3ZM21 10.05C20.8384 10.0172 20.6712 10 20.5 10C19.1193 10 18 11.1193 18 12.5V17H16V16H8V17H6V12.5C6 11.1193 4.88071 10 3.5 10C3.32877 10 3.16156 10.0172 3 10.05C1.85888 10.2816 1 11.2905 1 12.5C1 13.0886 1.18173 13.5388 1.39024 14.0554C1.67083 14.7505 1.9999 15.5658 1.99978 17V20C1.99978 20.5523 2.44749 21 2.99978 21H12H21.0002C21.5525 21 22.0002 20.5523 22.0002 20V17C22.0001 15.5658 22.3292 14.7505 22.6098 14.0554C22.8183 13.5388 23 13.0886 23 12.5C23 11.2905 22.1411 10.2816 21 10.05Z" />
+                                    </svg>
                                 </div>
-                                <span class="text-sm font-bold text-[#e11d48]">Dipilih</span>
+                                <span class="text-sm font-bold text-[#22c55e]">Dipilih</span>
                             </div>
                             <div class="flex items-center gap-4">
-                                <div class="w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <div class="text-red-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                                        <path d="M15 3H9C6.02024 3 3.54782 5.17213 3.07974 8.01937C3.21811 8.00655 3.35829 8 3.5 8C5.98528 8 8 10.0147 8 12.5V14H16V12.5C16 10.0147 18.0147 8 20.5 8C20.6417 8 20.7819 8.00655 20.9203 8.01937C20.4522 5.17213 17.9798 3 15 3ZM21 10.05C20.8384 10.0172 20.6712 10 20.5 10C19.1193 10 18 11.1193 18 12.5V17H16V16H8V17H6V12.5C6 11.1193 4.88071 10 3.5 10C3.32877 10 3.16156 10.0172 3 10.05C1.85888 10.2816 1 11.2905 1 12.5C1 13.0886 1.18173 13.5388 1.39024 14.0554C1.67083 14.7505 1.9999 15.5658 1.99978 17V20C1.99978 20.5523 2.44749 21 2.99978 21H12H21.0002C21.5525 21 22.0002 20.5523 22.0002 20V17C22.0001 15.5658 22.3292 14.7505 22.6098 14.0554C22.8183 13.5388 23 13.0886 23 12.5C23 11.2905 22.1411 10.2816 21 10.05Z" />
+                                    </svg>
                                 </div>
-                                <span class="text-sm font-bold text-gray-400">Sudah Terisi</span>
+                                <span class="text-sm font-bold text-red-500">Sudah Terisi</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Seat Layout Section -->
-                <div class="lg:col-span-8 flex flex-col items-center">
-                    <div class="bg-white rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-10 w-full max-w-md shadow-xl border border-gray-100 relative">
-                        <!-- Dashboard Area -->
-                        <div class="flex justify-between items-center mb-12 border-b border-gray-50 pb-8">
-                            <div class="flex flex-col items-center gap-2">
-                                <div class="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0112 2.25c6.627 0 12 5.373 12 12s-5.373 12-12 12-12-5.373-12-12c0-3.313 1.343-6.313 3.515-8.485M12 12l7.21-7.21" /></svg>
-                                </div>
-                                <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">Pintu</span>
+                <div class="lg:col-span-8 flex flex-col items-center px-2 sm:px-0">
+                    <div class="bg-white rounded-t-[3rem] sm:rounded-t-[5rem] lg:rounded-t-[6rem] rounded-b-[1.5rem] sm:rounded-b-[2rem] lg:rounded-b-[3rem] p-4 sm:p-12 lg:p-20 w-full max-w-2xl shadow-[0_40px_80px_rgba(0,0,0,0.06)] border border-gray-100/50 relative overflow-hidden sm:overflow-visible">
+                        <!-- Dashboard Area (Front) -->
+                        <div class="flex justify-between items-center mb-20 px-8">
+                            <div class="text-gray-500">
+                                <FontAwesomeIcon :icon="byPrefixAndName.fas['stairs']" class="w-12 h-12" />
                             </div>
-                            <div class="h-10 w-[2px] bg-gray-100"></div>
-                            <div class="flex flex-col items-center gap-2">
-                                <div class="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-                                </div>
-                                <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">Supir</span>
+                            <div class="text-gray-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12">
+                                    <circle cx="12" cy="12" r="9" />
+                                    <circle cx="12" cy="12" r="2.5" />
+                                    <line x1="3" y1="12" x2="9.5" y2="12" />
+                                    <line x1="14.5" y1="12" x2="21" y2="12" />
+                                    <line x1="12" y1="14.5" x2="12" y2="21" />
+                                </svg>
                             </div>
                         </div>
 
@@ -236,54 +251,84 @@ const proceedToBooking = () => {
                         <div class="space-y-4 sm:space-y-6">
                             <div v-for="row in seatRows" :key="row.id" class="flex justify-between items-center px-1 sm:px-0">
                                 <!-- Left side -->
-                                <div class="flex gap-3 sm:gap-4">
+                                <div class="flex gap-2 sm:gap-4 lg:gap-6">
                                     <button 
                                         v-for="seat in row.left" :key="seat"
                                         @click="toggleSeat(seat)"
                                         :disabled="isSeatBooked(seat)"
-                                        class="w-12 h-14 sm:w-14 sm:h-16 rounded-2xl flex flex-col items-center justify-center font-black text-sm transition-all duration-300 relative group"
-                                        :class="{
-                                            'bg-gray-100 text-gray-300 cursor-not-allowed': isSeatBooked(seat),
-                                            'bg-[#e11d48] text-white shadow-lg shadow-red-200 scale-110 z-10': isSeatSelected(seat),
-                                            'bg-white border-2 border-gray-100 text-gray-600 hover:border-[#e11d48] hover:text-[#e11d48] shadow-sm': !isSeatBooked(seat) && !isSeatSelected(seat)
-                                        }"
+                                        class="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 flex items-center justify-center transition-all duration-300 relative group"
                                     >
-                                        {{ seat }}
-                                        <div v-if="isSeatBooked(seat)" class="absolute -top-1 -right-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-gray-400 bg-white rounded-full"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 12.72l5.25-5.25a.75.75 0 10-1.06-1.06L10.25 12.94l-2.22-2.22a.75.75 0 00-1.06 1.06l2.75 2.75a.75.75 0 001.06 0z" clip-rule="evenodd" /></svg>
+                                        <svg v-if="isSeatBooked(seat) || isSeatSelected(seat)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
+                                            class="w-full h-full"
+                                            :style="{ filter: isSeatBooked(seat) ? 'drop-shadow(0 8px 12px rgba(239, 68, 68, 0.45))' : 'drop-shadow(0 8px 12px rgba(34, 197, 94, 0.45))' }"
+                                            :class="isSeatBooked(seat) ? 'text-red-500' : 'text-[#22c55e]'"
+                                        >
+                                            <path d="M15 3H9C6.02024 3 3.54782 5.17213 3.07974 8.01937C3.21811 8.00655 3.35829 8 3.5 8C5.98528 8 8 10.0147 8 12.5V14H16V12.5C16 10.0147 18.0147 8 20.5 8C20.6417 8 20.7819 8.00655 20.9203 8.01937C20.4522 5.17213 17.9798 3 15 3ZM21 10.05C20.8384 10.0172 20.6712 10 20.5 10C19.1193 10 18 11.1193 18 12.5V17H16V16H8V17H6V12.5C6 11.1193 4.88071 10 3.5 10C3.32877 10 3.16156 10.0172 3 10.05C1.85888 10.2816 1 11.2905 1 12.5C1 13.0886 1.18173 13.5388 1.39024 14.0554C1.67083 14.7505 1.9999 15.5658 1.99978 17V20C1.99978 20.5523 2.44749 21 2.99978 21H12H21.0002C21.5525 21 22.0002 20.5523 22.0002 20V17C22.0001 15.5658 22.3292 14.7505 22.6098 14.0554C22.8183 13.5388 23 13.0886 23 12.5C23 11.2905 22.1411 10.2816 21 10.05Z" />
+                                        </svg>
+                                        <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-full h-full text-[#bfc3cc]">
+                                            <path d="M15 3H9C6.02024 3 3.54782 5.17213 3.07974 8.01937C3.21811 8.00655 3.35829 8 3.5 8C5.98528 8 8 10.0147 8 12.5V14H16V12.5C16 10.0147 18.0147 8 20.5 8C20.6417 8 20.7819 8.00655 20.9203 8.01937C20.4522 5.17213 17.9798 3 15 3ZM21 10.05C20.8384 10.0172 20.6712 10 20.5 10C19.1193 10 18 11.1193 18 12.5V17H16V16H8V17H6V12.5C6 11.1193 4.88071 10 3.5 10C3.32877 10 3.16156 10.0172 3 10.05C1.85888 10.2816 1 11.2905 1 12.5C1 13.0886 1.18173 13.5388 1.39024 14.0554C1.67083 14.7505 1.9999 15.5658 1.99978 17V20C1.99978 20.5523 2.44749 21 2.99978 21H12H21.0002C21.5525 21 22.0002 20.5523 22.0002 20V17C22.0001 15.5658 22.3292 14.7505 22.6098 14.0554C22.8183 13.5388 23 13.0886 23 12.5C23 11.2905 22.1411 10.2816 21 10.05Z" />
+                                        </svg>
+                                        <span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-[11px] lg:text-[12px] font-bold mt-1 sm:mt-2" 
+                                            :class="isSeatSelected(seat) || isSeatBooked(seat) ? 'text-white' : 'text-gray-600'"
+                                        >{{ seat }}</span>
+                                        
+                                        <!-- Tooltip -->
+                                        <div class="absolute -top-12 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity z-50 bg-[#bfc3cc] text-white px-4 py-2 rounded-xl text-[11px] font-medium whitespace-nowrap shadow-xl">
+                                            Seat: {{ seat }} | {{ formatPrice(schedule.price) }}
+                                            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#bfc3cc] rotate-45"></div>
                                         </div>
                                     </button>
                                 </div>
 
                                 <!-- Aisle -->
-                                <div class="w-6 sm:w-8 h-full flex flex-col items-center justify-center shrink-0">
-                                    <div class="w-[2px] h-10 sm:h-12 bg-gray-100 rounded-full"></div>
-                                </div>
+                                <div class="w-12 sm:w-16 lg:w-28 h-full flex items-center justify-center shrink-0"></div>
 
                                 <!-- Right side -->
-                                <div class="flex gap-3 sm:gap-4">
+                                <div class="flex gap-2 sm:gap-4 lg:gap-6">
                                     <button 
                                         v-for="seat in row.right" :key="seat"
                                         @click="toggleSeat(seat)"
                                         :disabled="isSeatBooked(seat)"
-                                        class="w-12 h-14 sm:w-14 sm:h-16 rounded-2xl flex flex-col items-center justify-center font-black text-sm transition-all duration-300 relative group"
-                                        :class="{
-                                            'bg-gray-100 text-gray-300 cursor-not-allowed': isSeatBooked(seat),
-                                            'bg-[#e11d48] text-white shadow-lg shadow-red-200 scale-110 z-10': isSeatSelected(seat),
-                                            'bg-white border-2 border-gray-100 text-gray-600 hover:border-[#e11d48] hover:text-[#e11d48] shadow-sm': !isSeatBooked(seat) && !isSeatSelected(seat)
-                                        }"
+                                        class="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 flex items-center justify-center transition-all duration-300 relative group"
                                     >
-                                        {{ seat }}
-                                        <div v-if="isSeatBooked(seat)" class="absolute -top-1 -right-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-gray-400 bg-white rounded-full"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 12.72l5.25-5.25a.75.75 0 10-1.06-1.06L10.25 12.94l-2.22-2.22a.75.75 0 00-1.06 1.06l2.75 2.75a.75.75 0 001.06 0z" clip-rule="evenodd" /></svg>
+                                        <svg v-if="isSeatBooked(seat) || isSeatSelected(seat)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
+                                            class="w-full h-full"
+                                            :style="{ filter: isSeatBooked(seat) ? 'drop-shadow(0 8px 12px rgba(239, 68, 68, 0.45))' : 'drop-shadow(0 8px 12px rgba(34, 197, 94, 0.45))' }"
+                                            :class="isSeatBooked(seat) ? 'text-red-500' : 'text-[#22c55e]'"
+                                        >
+                                            <path d="M15 3H9C6.02024 3 3.54782 5.17213 3.07974 8.01937C3.21811 8.00655 3.35829 8 3.5 8C5.98528 8 8 10.0147 8 12.5V14H16V12.5C16 10.0147 18.0147 8 20.5 8C20.6417 8 20.7819 8.00655 20.9203 8.01937C20.4522 5.17213 17.9798 3 15 3ZM21 10.05C20.8384 10.0172 20.6712 10 20.5 10C19.1193 10 18 11.1193 18 12.5V17H16V16H8V17H6V12.5C6 11.1193 4.88071 10 3.5 10C3.32877 10 3.16156 10.0172 3 10.05C1.85888 10.2816 1 11.2905 1 12.5C1 13.0886 1.18173 13.5388 1.39024 14.0554C1.67083 14.7505 1.9999 15.5658 1.99978 17V20C1.99978 20.5523 2.44749 21 2.99978 21H12H21.0002C21.5525 21 22.0002 20.5523 22.0002 20V17C22.0001 15.5658 22.3292 14.7505 22.6098 14.0554C22.8183 13.5388 23 13.0886 23 12.5C23 11.2905 22.1411 10.2816 21 10.05Z" />
+                                        </svg>
+                                        <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-full h-full text-[#bfc3cc]">
+                                            <path d="M15 3H9C6.02024 3 3.54782 5.17213 3.07974 8.01937C3.21811 8.00655 3.35829 8 3.5 8C5.98528 8 8 10.0147 8 12.5V14H16V12.5C16 10.0147 18.0147 8 20.5 8C20.6417 8 20.7819 8.00655 20.9203 8.01937C20.4522 5.17213 17.9798 3 15 3ZM21 10.05C20.8384 10.0172 20.6712 10 20.5 10C19.1193 10 18 11.1193 18 12.5V17H16V16H8V17H6V12.5C6 11.1193 4.88071 10 3.5 10C3.32877 10 3.16156 10.0172 3 10.05C1.85888 10.2816 1 11.2905 1 12.5C1 13.0886 1.18173 13.5388 1.39024 14.0554C1.67083 14.7505 1.9999 15.5658 1.99978 17V20C1.99978 20.5523 2.44749 21 2.99978 21H12H21.0002C21.5525 21 22.0002 20.5523 22.0002 20V17C22.0001 15.5658 22.3292 14.7505 22.6098 14.0554C22.8183 13.5388 23 13.0886 23 12.5C23 11.2905 22.1411 10.2816 21 10.05Z" />
+                                        </svg>
+                                        <span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-[11px] lg:text-[12px] font-bold mt-1 sm:mt-2" 
+                                            :class="isSeatSelected(seat) || isSeatBooked(seat) ? 'text-white' : 'text-gray-600'"
+                                        >{{ seat }}</span>
+                                        
+                                        <!-- Tooltip -->
+                                        <div class="absolute -top-12 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity z-50 bg-[#bfc3cc] text-white px-4 py-2 rounded-xl text-[11px] font-medium whitespace-nowrap shadow-xl">
+                                            Seat: {{ seat }} | {{ formatPrice(schedule.price) }}
+                                            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#bfc3cc] rotate-45"></div>
                                         </div>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Rear Area (Back) -->
+                        <div class="flex justify-between items-end mt-8 px-8">
+                            <div class="flex flex-col gap-6 text-gray-500">
+                                <FontAwesomeIcon :icon="byPrefixAndName.fas['stairs']" class="w-12 h-12" />
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 ml-1">
+                                    <path d="M7 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 5.5c1.1 0 2.5.4 2.5 2v5.5H8v6H6v-6H4.5v-5.5c0-1.6 1.4-2 2.5-2zM17 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-3.5 5.5h7l-1.5 6.5h-1v7h-2v-7h-1l-1.5-6.5z" />
+                                    <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <div></div>
+                        </div>
+
                         <!-- Rear Bumper Decoration -->
-                        <div class="mt-12 h-4 w-full bg-gray-50 rounded-b-3xl"></div>
+                        <div class="mt-8 h-4 w-full bg-gray-50/50 rounded-b-[2rem]"></div>
                     </div>
                 </div>
             </div>
@@ -300,13 +345,13 @@ const proceedToBooking = () => {
                     <div class="h-10 w-[1px] bg-gray-100"></div>
                     <div>
                         <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Total Bayar</p>
-                        <p class="text-2xl font-black text-[#e11d48]">{{ formatPrice(totalPrice) }}</p>
+                        <p class="text-2xl font-black text-[#22c55e]">{{ formatPrice(totalPrice) }}</p>
                     </div>
                 </div>
                 <button 
                     @click="proceedToBooking" 
                     :disabled="form.seats.length === 0 || form.processing" 
-                    class="w-full sm:w-auto flex items-center justify-center gap-3 rounded-2xl bg-[#e11d48] px-10 py-4 text-sm font-black uppercase tracking-widest text-white shadow-xl shadow-red-200 hover:bg-red-700 transition active:scale-95 disabled:opacity-50"
+                    class="w-full sm:w-auto flex items-center justify-center gap-3 rounded-2xl bg-[#22c55e] px-10 py-4 text-sm font-black uppercase tracking-widest text-white shadow-xl shadow-green-100 hover:bg-green-600 transition active:scale-95 disabled:opacity-50"
                 >
                     {{ form.processing ? 'Memproses...' : 'Lanjut Pembayaran' }}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
